@@ -1004,7 +1004,8 @@ class ModelSerializer(Serializer):
                 many_to_many[field_name] = validated_data.pop(field_name)
 
         try:
-            instance = ModelClass._default_manager.create(**validated_data)
+            instance = ModelClass(**validated_data)
+            instance.save()
         except TypeError:
             tb = traceback.format_exc()
             msg = (
